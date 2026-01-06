@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Atakujący — legalne osadzenie</title>
+    <style>
+      :root {
+        --bg: #070a14;
+        --panel: rgba(255, 255, 255, 0.06);
+        --text: rgba(255, 255, 255, 0.92);
+        --muted: rgba(255, 255, 255, 0.72);
+        --border: rgba(255, 255, 255, 0.14);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+        background: radial-gradient(900px 500px at 30% 0%, rgba(59, 130, 246, 0.18), transparent 60%),
+          radial-gradient(800px 500px at 80% 30%, rgba(124, 58, 237, 0.16), transparent 60%), var(--bg);
+        color: var(--text);
+        padding: 22px 16px;
+      }
+      .wrap {
+        max-width: 980px;
+        margin: 0 auto;
+      }
+      .card {
+        border: 1px solid var(--border);
+        background: var(--panel);
+        border-radius: 18px;
+        padding: 16px;
+      }
+      h1 {
+        font-size: 20px;
+        margin: 0 0 8px;
+      }
+      p {
+        margin: 0 0 10px;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+      code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      }
+      iframe {
+        width: 100%;
+        height: 240px;
+        border: 0;
+        border-radius: 18px;
+        overflow: hidden;
+      }
+      .note {
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="card">
+        <h1>Legalne osadzenie (demo)</h1>
+        <p>
+          Ten widok osadza publiczną treść ofiary: <code>{{ victim_origin }}/public/banner</code>. W wariancie
+          selektywnym (nagłówki tylko dla <code>/sensitive/*</code>) to powinno nadal działać.
+        </p>
+
+        <iframe title="public-banner" src="{{ victim_origin }}/public/banner"></iframe>
+
+        <div class="note">
+          Jeśli to zniknie po włączeniu ochrony selektywnej, to znaczy, że zabezpieczenia zostały zastosowane zbyt
+          szeroko (nie tylko do ścieżek wrażliwych).
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+

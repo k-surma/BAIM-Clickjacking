@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Ofiara — konto{% endblock %}
+
+{% block content %}
+  <div class="card">
+    <h1 class="h1">Konto użytkownika (demo)</h1>
+    <p class="p">To jest “stan” aplikacji, który będziemy zmieniać przez kliknięcie w ukryty przycisk w iframe.</p>
+
+    <div class="row" style="margin-top: 10px">
+      <span class="pill"><strong>E-mail:</strong>&nbsp;<code>{{ email }}</code></span>
+      {% if last_change_utc %}
+        <span class="pill"><strong>Ostatnia zmiana (UTC):</strong>&nbsp;<code>{{ last_change_utc }}</code></span>
+      {% else %}
+        <span class="pill"><strong>Ostatnia zmiana:</strong>&nbsp;<code>brak</code></span>
+      {% endif %}
+    </div>
+
+    <div class="row" style="margin-top: 14px">
+      <a class="btn" href="{{ url_for('reset') }}">Resetuj e-mail</a>
+      <a class="btn" href="{{ url_for('sensitive_change_email') }}">Idź do wrażliwej akcji</a>
+    </div>
+  </div>
+{% endblock %}
+
+

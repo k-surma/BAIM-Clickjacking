@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Ofiara — start{% endblock %}
+
+{% block content %}
+  <div class="card">
+    <h1 class="h1">Clickjacking — strona ofiary</h1>
+    <p class="p">
+      Ta aplikacja udostępnia “konto” z e‑mailem oraz wrażliwą akcję zmiany e‑maila pod
+      <code>/sensitive/change-email</code>.
+    </p>
+    <p class="p">
+      Strona atakującego osadza wrażliwą stronę w niewidocznym <code>iframe</code> i nakłania użytkownika do kliknięcia.
+    </p>
+    <div class="row">
+      <a class="btn" href="{{ url_for('account') }}">Przejdź do /account</a>
+      <a class="btn" href="{{ url_for('sensitive_change_email') }}">Przejdź do /sensitive/change-email</a>
+      <a class="btn" href="{{ url_for('embed_demo') }}">Przejdź do /embed-demo</a>
+    </div>
+    <p class="p" style="margin-top: 12px">
+      W czasie labów przełączaj tryb nagłówków przez zmienną środowiskową:
+      <code>VICTIM_PROTECTION</code> (np. <code>xfo_deny</code>, <code>csp_self</code>, <code>selective_csp_self</code>).
+    </p>
+  </div>
+{% endblock %}
+
+

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ofiara — wrażliwa akcja</title>
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+      body {
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+        background: #ffffff;
+        color: #111827;
+        position: relative;
+        overflow: hidden;
+      }
+      .top {
+        padding: 12px 14px;
+        font-size: 14px;
+        color: rgba(17, 24, 39, 0.7);
+      }
+      .confirm-btn {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 22px;
+        padding: 18px 22px;
+        border-radius: 14px;
+        border: 2px solid #111827;
+        background: #111827;
+        color: white;
+        cursor: pointer;
+        min-width: 220px;
+      }
+      .confirm-btn:hover {
+        background: #0b1220;
+      }
+      .bottom {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 12px 14px;
+        font-size: 12px;
+        color: rgba(17, 24, 39, 0.7);
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top">
+      <strong>Wrażliwa akcja (demo):</strong> potwierdzenie zmiany e‑maila.
+    </div>
+
+    <form method="post" action="/sensitive/confirm-change-email">
+      <input type="hidden" name="new_email" value="{{ new_email }}" />
+      <button id="confirm-btn" class="confirm-btn" type="submit">Potwierdź zmianę</button>
+    </form>
+
+    <div class="bottom">
+      <div>Nowy e‑mail: <span class="mono">{{ new_email }}</span></div>
+      <div>Wskazówka: w clickjackingu ten przycisk jest “klikany” przez niewidoczne iframe.</div>
+    </div>
+  </body>
+</html>
+
+

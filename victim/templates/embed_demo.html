@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Ofiara — embed demo{% endblock %}
+
+{% block content %}
+  <div class="card">
+    <h1 class="h1">Embed demo (ten sam origin)</h1>
+    <p class="p">
+      Ta strona osadza wrażliwą ścieżkę ofiary w <code>iframe</code>. Jest to legalny przypadek (ten sam origin),
+      który działa przy <code>X-Frame-Options: SAMEORIGIN</code> albo <code>CSP frame-ancestors 'self'</code>.
+    </p>
+    <div class="row" style="margin-top: 10px">
+      <a class="btn" href="{{ url_for('sensitive_change_email') }}">Otwórz /sensitive/change-email w tej karcie</a>
+      <a class="btn" href="{{ url_for('account') }}">Sprawdź /account</a>
+    </div>
+
+    <div style="margin-top: 16px; border: 1px solid rgba(255,255,255,0.14); border-radius: 14px; overflow: hidden;">
+      <iframe
+        title="legal-embed"
+        src="/sensitive/change-email?new_email=legal@trusted.test"
+        style="width: 100%; height: 260px; border: 0; background: white"
+      ></iframe>
+    </div>
+  </div>
+{% endblock %}
+
+

