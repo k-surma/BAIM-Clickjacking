@@ -239,9 +239,12 @@ W ramach zadań dodatkowych, które kładą większy nacisk na praktykę i zaawa
 
 **Krok 2:** Rozwiąż zadania w module [Clickjacking](https://portswigger.net/web-security/all-labs#clickjacking) - polecamy zacząć od:
 - [Basic clickjacking with CSRF token protection](https://portswigger.net/web-security/clickjacking/lab-basic-csrf-protected)
+  
 a następnie przejść do:
+
 - [Exploiting clickjacking vulnerability to trigger DOM-based XSS](https://portswigger.net/web-security/clickjacking/lab-exploiting-to-trigger-dom-based-xss)
-Pozostałe zadania w dowolnej kolejności.
+  
+Pozostałe zadania -  w dowolnej kolejności.
 
 **Wskazówki do zadań:**
 
