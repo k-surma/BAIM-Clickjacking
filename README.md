@@ -243,8 +243,9 @@ W ramach zadań dodatkowych, które kładą większy nacisk na praktykę i zaawa
 a następnie przejść do:
 
 - [Exploiting clickjacking vulnerability to trigger DOM-based XSS](https://portswigger.net/web-security/clickjacking/lab-exploiting-to-trigger-dom-based-xss)
-  
-Pozostałe zadania -  w dowolnej kolejności.
 
 **Wskazówki do zadań:**
+Spraw aby osadzany iframe był niewidoczny z uzyciem css; umieść tekst zachęcający do kliknięcia nad niewidocznym przeciskiem; upenij się, że url osadzanej treści jest kompletny i poprawny.
+
+Pozostałe zadania -  w dowolnej kolejności.
 
